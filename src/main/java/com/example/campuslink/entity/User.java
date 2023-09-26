@@ -1,51 +1,42 @@
 package com.example.campuslink.entity;
 
 
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Objects;
 
-@Document("user")
+@Document(collection = "users")
 public class User {
-    @Id
-    private Long id;
-    private String userName;
-    private String passWord;
+    private int userid;
+    private String username;
+    private String password;
     private String email;
 
     public User() {
     }
 
-    public User(Long id, String userName, String passWord, String email) {
-        this.id = id;
-        this.userName = userName;
-        this.passWord = passWord;
-        this.email = email;
+    public int getUserid() {
+        return userid;
     }
 
-    public Long getId() {
-        return id;
+    public void setUserid(int userid) {
+        this.userid = userid;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public String getUsername() {
+        return username;
     }
 
-    public String getUserName() {
-        return userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public String getPassword() {
+        return password;
     }
 
-    public String getPassWord() {
-        return passWord;
-    }
-
-    public void setPassWord(String passWord) {
-        this.passWord = passWord;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getEmail() {
@@ -61,20 +52,20 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(userName, user.userName) && Objects.equals(passWord, user.passWord) && Objects.equals(email, user.email);
+        return userid == user.userid && Objects.equals(username, user.username) && Objects.equals(password, user.password) && Objects.equals(email, user.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, userName, passWord, email);
+        return Objects.hash(userid, username, password, email);
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
-                ", userName='" + userName + '\'' +
-                ", passWord='" + passWord + '\'' +
+                "userid=" + userid +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 '}';
     }
