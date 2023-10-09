@@ -3,49 +3,49 @@ package com.example.campuslink.entity;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Objects;
-@Document(collection = "reminde")
+@Document(collection = "reminder")
 public class Reminder {
-    private int remindeid;
-    private int eventid;
+    private int reminderId;
+    private int eventId;
     private String status;
-    private String remindertime;
+    private String reminderTime;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Reminder reminder)) return false;
-        return remindeid == reminder.remindeid && eventid == reminder.eventid && status.equals(reminder.status) && remindertime.equals(reminder.remindertime);
+        return reminderId == reminder.reminderId && eventId == reminder.eventId && status.equals(reminder.status) && reminderTime.equals(reminder.reminderTime);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(remindeid, eventid, status, remindertime);
+        return Objects.hash(reminderId, eventId, status, reminderTime);
     }
 
     @Override
     public String toString() {
         return "Reminde{" +
-                "remindeid=" + remindeid +
-                ", eventid=" + eventid +
+                "remindeid=" + reminderId +
+                ", eventid=" + eventId +
                 ", status='" + status + '\'' +
-                ", remindertime='" + remindertime + '\'' +
+                ", remindertime='" + reminderTime + '\'' +
                 '}';
     }
 
     public int getRemindeid() {
-        return remindeid;
+        return reminderId;
     }
 
     public void setRemindeid(int remindeid) {
-        this.remindeid = remindeid;
+        this.reminderId = remindeid;
     }
 
-    public int getEventid() {
-        return eventid;
+    public int getEventId() {
+        return eventId;
     }
 
-    public void setEventid(int eventid) {
-        this.eventid = eventid;
+    public void setEventId(int eventId) {
+        this.eventId = eventId;
     }
 
     public String getStatus() {
@@ -57,17 +57,17 @@ public class Reminder {
     }
 
     public String getRemindertime() {
-        return remindertime;
+        return reminderTime;
     }
 
     public void setRemindertime(String remindertime) {
-        this.remindertime = remindertime;
+        this.reminderTime = remindertime;
     }
 
     public Reminder(int remindeid, int eventid, String status, String remindertime) {
-        this.remindeid = remindeid;
-        this.eventid = eventid;
+        this.reminderId = remindeid;
+        this.eventId = eventid;
         this.status = status;
-        this.remindertime = remindertime;
+        this.reminderTime = remindertime;
     }
 }

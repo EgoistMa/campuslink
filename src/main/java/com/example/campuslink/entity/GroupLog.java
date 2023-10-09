@@ -6,16 +6,16 @@ import java.util.Objects;
 
 @Document(collection = "groupLog")
 public class GroupLog {
-    private int logid;
+    private int logId;
     private int userid;
-    private int groupid;
+    private int groupId;
     private String action;
     private String timestamp;
 
     public GroupLog(int logid, int userid, int groupid, String action, String timestamp) {
-        this.logid = logid;
+        this.logId = logid;
         this.userid = userid;
-        this.groupid = groupid;
+        this.groupId = groupid;
         this.action = action;
         this.timestamp = timestamp;
     }
@@ -23,9 +23,9 @@ public class GroupLog {
     @Override
     public String toString() {
         return "GroupLog{" +
-                "logid=" + logid +
+                "logid=" + logId +
                 ", userid=" + userid +
-                ", groupid=" + groupid +
+                ", groupid=" + groupId +
                 ", action='" + action + '\'' +
                 ", timestamp='" + timestamp + '\'' +
                 '}';
@@ -35,20 +35,20 @@ public class GroupLog {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof GroupLog groupLog)) return false;
-        return logid == groupLog.logid && userid == groupLog.userid && groupid == groupLog.groupid && action.equals(groupLog.action) && timestamp.equals(groupLog.timestamp);
+        return logId == groupLog.logId && userid == groupLog.userid && groupId == groupLog.groupId && action.equals(groupLog.action) && timestamp.equals(groupLog.timestamp);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(logid, userid, groupid, action, timestamp);
+        return Objects.hash(logId, userid, groupId, action, timestamp);
     }
 
-    public int getLogid() {
-        return logid;
+    public int getLogId() {
+        return logId;
     }
 
-    public void setLogid(int logid) {
-        this.logid = logid;
+    public void setLogId(int logId) {
+        this.logId = logId;
     }
 
     public int getUserid() {
@@ -59,12 +59,12 @@ public class GroupLog {
         this.userid = userid;
     }
 
-    public int getGroupid() {
-        return groupid;
+    public int getGroupId() {
+        return groupId;
     }
 
-    public void setGroupid(int groupid) {
-        this.groupid = groupid;
+    public void setGroupId(int groupId) {
+        this.groupId = groupId;
     }
 
     public String getAction() {

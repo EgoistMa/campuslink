@@ -7,14 +7,14 @@ import java.util.Objects;
 @Document(collection = "group")
 public class Group {
 
-    private int groupid;
-    private String groupcreatetime;
+    private int groupId;
+    private String groupCreateTime;
     private String description;
     private String GroupName;
 
     public Group(int groupid, String groupcreatetime, String description, String groupName) {
-        this.groupid = groupid;
-        this.groupcreatetime = groupcreatetime;
+        this.groupId = groupid;
+        this.groupCreateTime = groupcreatetime;
         this.description = description;
         GroupName = groupName;
     }
@@ -22,8 +22,8 @@ public class Group {
     @Override
     public String toString() {
         return "group{" +
-                "groupid=" + groupid +
-                ", groupcreatetime='" + groupcreatetime + '\'' +
+                "groupid=" + groupId +
+                ", groupcreatetime='" + groupCreateTime + '\'' +
                 ", description='" + description + '\'' +
                 ", GroupName='" + GroupName + '\'' +
                 '}';
@@ -33,28 +33,28 @@ public class Group {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Group group)) return false;
-        return groupid == group.groupid && groupcreatetime.equals(group.groupcreatetime) && Objects.equals(description, group.description) && GroupName.equals(group.GroupName);
+        return groupId == group.groupId && groupCreateTime.equals(group.groupCreateTime) && Objects.equals(description, group.description) && GroupName.equals(group.GroupName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(groupid, groupcreatetime, description, GroupName);
+        return Objects.hash(groupId, groupCreateTime, description, GroupName);
     }
 
-    public int getGroupid() {
-        return groupid;
+    public int getGroupId() {
+        return groupId;
     }
 
-    public void setGroupid(int groupid) {
-        this.groupid = groupid;
+    public void setGroupId(int groupId) {
+        this.groupId = groupId;
     }
 
-    public String getGroupcreatetime() {
-        return groupcreatetime;
+    public String getGroupCreateTime() {
+        return groupCreateTime;
     }
 
-    public void setGroupcreatetime(String groupcreatetime) {
-        this.groupcreatetime = groupcreatetime;
+    public void setGroupCreateTime(String groupCreateTime) {
+        this.groupCreateTime = groupCreateTime;
     }
 
     public String getDescription() {

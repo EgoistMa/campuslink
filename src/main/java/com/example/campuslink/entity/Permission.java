@@ -7,13 +7,13 @@ import java.util.Objects;
 @Document(collection = "permissions")
 public class Permission {
     private int userid;
-    private int permissionlevel;
-    private int groupid;
+    private int permissionLevel;
+    private int groupId;
 
     public Permission(int userid, int permissionlevel, int groupid) {
         this.userid = userid;
-        this.permissionlevel = permissionlevel;
-        this.groupid = groupid;
+        this.permissionLevel = permissionlevel;
+        this.groupId = groupid;
     }
 
     public int getUserid() {
@@ -24,28 +24,28 @@ public class Permission {
         this.userid = userid;
     }
 
-    public int getPermissionlevel() {
-        return permissionlevel;
+    public int getPermissionLevel() {
+        return permissionLevel;
     }
 
-    public void setPermissionlevel(int permissionlevel) {
-        this.permissionlevel = permissionlevel;
+    public void setPermissionLevel(int permissionLevel) {
+        this.permissionLevel = permissionLevel;
     }
 
-    public int getGroupid() {
-        return groupid;
+    public int getGroupId() {
+        return groupId;
     }
 
-    public void setGroupid(int groupid) {
-        this.groupid = groupid;
+    public void setGroupId(int groupId) {
+        this.groupId = groupId;
     }
 
     @Override
     public String toString() {
         return "Permission{" +
                 "userid=" + userid +
-                ", permissionlevel=" + permissionlevel +
-                ", groupid=" + groupid +
+                ", permissionlevel=" + permissionLevel +
+                ", groupid=" + groupId +
                 '}';
     }
 
@@ -53,11 +53,11 @@ public class Permission {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Permission that)) return false;
-        return userid == that.userid && permissionlevel == that.permissionlevel && groupid == that.groupid;
+        return userid == that.userid && permissionLevel == that.permissionLevel && groupId == that.groupId;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userid, permissionlevel, groupid);
+        return Objects.hash(userid, permissionLevel, groupId);
     }
 }

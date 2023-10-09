@@ -6,7 +6,7 @@ import java.util.Objects;
 
 @Document(collection = "eventLog")
 public class EventLog {
-    private int logid;
+    private int logId;
     private int userid;
     private String action;
     private String timestamp;
@@ -15,30 +15,30 @@ public class EventLog {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof EventLog eventLog)) return false;
-        return logid == eventLog.logid && userid == eventLog.userid && action.equals(eventLog.action) && timestamp.equals(eventLog.timestamp);
+        return logId == eventLog.logId && userid == eventLog.userid && action.equals(eventLog.action) && timestamp.equals(eventLog.timestamp);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(logid, userid, action, timestamp);
+        return Objects.hash(logId, userid, action, timestamp);
     }
 
     @Override
     public String toString() {
         return "EventLog{" +
-                "logid=" + logid +
+                "logid=" + logId +
                 ", userid=" + userid +
                 ", action='" + action + '\'' +
                 ", timestamp='" + timestamp + '\'' +
                 '}';
     }
 
-    public int getLogid() {
-        return logid;
+    public int getLogId() {
+        return logId;
     }
 
-    public void setLogid(int logid) {
-        this.logid = logid;
+    public void setLogId(int logId) {
+        this.logId = logId;
     }
 
     public int getUserid() {
@@ -66,7 +66,7 @@ public class EventLog {
     }
 
     public EventLog(int logid, int userid, String action, String timestamp) {
-        this.logid = logid;
+        this.logId = logid;
         this.userid = userid;
         this.action = action;
         this.timestamp = timestamp;

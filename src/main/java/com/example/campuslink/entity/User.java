@@ -1,42 +1,83 @@
 package com.example.campuslink.entity;
 
-
 import org.springframework.data.mongodb.core.mapping.Document;
-
+import java.util.Date;
 import java.util.Objects;
+import java.util.UUID;
 
 @Document(collection = "users")
 public class User {
-    private int userid;
-    private String username;
-    private String password;
+    private UUID uuid;
+    private String firstname;
+    private String middleName;
+    private String lastname;
     private String email;
+    private String password;
+    private String nickname;
+    private Date lastLoginTime;
+    private String accountStatus;
+    private String googleToken;
+    private String oktaToken;
 
-    public User() {
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User user)) return false;
+        return uuid == user.uuid && firstname.equals(user.firstname) && Objects.equals(middleName, user.middleName) && lastname.equals(user.lastname) && email.equals(user.email) && password.equals(user.password) && nickname.equals(user.nickname) && lastLoginTime.equals(user.lastLoginTime) && accountStatus.equals(user.accountStatus) && Objects.equals(googleToken, user.googleToken) && Objects.equals(oktaToken, user.oktaToken);
     }
 
-    public int getUserid() {
-        return userid;
+    @Override
+    public int hashCode() {
+        return Objects.hash(uuid, firstname, middleName, lastname, email, password, nickname, lastLoginTime, accountStatus, googleToken, oktaToken);
     }
 
-    public void setUserid(int userid) {
-        this.userid = userid;
+    @Override
+    public String toString() {
+        return "User{" +
+                "userid=" + uuid +
+                ", firstname='" + firstname + '\'' +
+                ", middleName='" + middleName + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", lastLoginTime='" + lastLoginTime + '\'' +
+                ", accountStatus='" + accountStatus + '\'' +
+                ", googleToken='" + googleToken + '\'' +
+                ", oktaToken='" + oktaToken + '\'' +
+                '}';
     }
 
-    public String getUsername() {
-        return username;
+    public UUID getUuid() {
+        return uuid;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
     }
 
-    public String getPassword() {
-        return password;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getMiddleName() {
+        return middleName;
+    }
+
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getEmail() {
@@ -47,26 +88,68 @@ public class User {
         this.email = email;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return userid == user.userid && Objects.equals(username, user.username) && Objects.equals(password, user.password) && Objects.equals(email, user.email);
+    public String getPassword() {
+        return password;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(userid, username, password, email);
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "userid=" + userid +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public Date getLastLoginTime() {
+        return lastLoginTime;
+    }
+
+    public void setLastLoginTime(Date lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
+    }
+
+    public String getAccountStatus() {
+        return accountStatus;
+    }
+
+    public void setAccountStatus(String accountStatus) {
+        this.accountStatus = accountStatus;
+    }
+
+    public String getGoogleToken() {
+        return googleToken;
+    }
+
+    public void setGoogleToken(String googleToken) {
+        this.googleToken = googleToken;
+    }
+
+    public String getOktaToken() {
+        return oktaToken;
+    }
+
+    public void setOktaToken(String oktaToken) {
+        this.oktaToken = oktaToken;
+    }
+
+    public User(UUID uuid, String firstname, String middleName, String lastname, String email, String password, String nickname, Date lastLogintime, String accountstatus, String googletoken, String oktatoken) {
+        this.uuid = uuid;
+        this.firstname = firstname;
+        this.middleName = middleName;
+        this.lastname = lastname;
+        this.email = email;
+        this.password = password;
+        this.nickname = nickname;
+        this.lastLoginTime = lastLogintime;
+        this.accountStatus = accountstatus;
+        this.googleToken = googletoken;
+        this.oktaToken = oktatoken;
+    }
+    public User(){
+
     }
 }

@@ -4,42 +4,43 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Objects;
 @Document(collection = "buildingcode")
-public class Buildingcode {
-    private String buildingcode;
+public class BuildingCode {
+    private String buildingCode;
     private String address;
-    private String locationname;
+    private String locationName;
     private String latitude;
     private String Longitude;
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Buildingcode that)) return false;
-        return buildingcode.equals(that.buildingcode) && address.equals(that.address) && locationname.equals(that.locationname) && Objects.equals(latitude, that.latitude) && Objects.equals(Longitude, that.Longitude);
+        if (!(o instanceof BuildingCode that)) return false;
+        return buildingCode.equals(that.buildingCode) && address.equals(that.address) && locationName.equals(that.locationName) && Objects.equals(latitude, that.latitude) && Objects.equals(Longitude, that.Longitude);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(buildingcode, address, locationname, latitude, Longitude);
+        return Objects.hash(buildingCode, address, locationName, latitude, Longitude);
     }
 
     @Override
     public String toString() {
         return "buildingcode{" +
-                "buildingcode='" + buildingcode + '\'' +
+                "buildingcode='" + buildingCode + '\'' +
                 ", address='" + address + '\'' +
-                ", locationname='" + locationname + '\'' +
+                ", locationname='" + locationName + '\'' +
                 ", latitude='" + latitude + '\'' +
                 ", Longitude='" + Longitude + '\'' +
                 '}';
     }
 
-    public String getBuildingcode() {
-        return buildingcode;
+    public String getBuildingCode() {
+        return buildingCode;
     }
 
-    public void setBuildingcode(String buildingcode) {
-        this.buildingcode = buildingcode;
+    public void setBuildingCode(String buildingCode) {
+        this.buildingCode = buildingCode;
     }
 
     public String getAddress() {
@@ -50,12 +51,12 @@ public class Buildingcode {
         this.address = address;
     }
 
-    public String getLocationname() {
-        return locationname;
+    public String getLocationName() {
+        return locationName;
     }
 
-    public void setLocationname(String locationname) {
-        this.locationname = locationname;
+    public void setLocationName(String locationName) {
+        this.locationName = locationName;
     }
 
     public String getLatitude() {
@@ -74,10 +75,10 @@ public class Buildingcode {
         Longitude = longitude;
     }
 
-    public Buildingcode(String buildingcode, String address, String locationname, String latitude, String longitude) {
-        this.buildingcode = buildingcode;
+    public BuildingCode(String buildingcode, String address, String locationname, String latitude, String longitude) {
+        this.buildingCode = buildingcode;
         this.address = address;
-        this.locationname = locationname;
+        this.locationName = locationname;
         this.latitude = latitude;
         Longitude = longitude;
     }

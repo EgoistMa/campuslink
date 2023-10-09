@@ -6,19 +6,19 @@ import java.util.Objects;
 
 @Document(collection = "comments")
 public class Comments {
-    private int eventid;
-    private int commentid;
-    private String auther;
-    private String createdtime;
+    private int eventId;
+    private int commentId;
+    private String author;
+    private String createdTime;
     private String content;
 
     @Override
     public String toString() {
         return "comments{" +
-                "eventid=" + eventid +
-                ", commentid=" + commentid +
-                ", auther='" + auther + '\'' +
-                ", createdtime='" + createdtime + '\'' +
+                "eventid=" + eventId +
+                ", commentid=" + commentId +
+                ", auther='" + author + '\'' +
+                ", createdtime='" + createdTime + '\'' +
                 ", content='" + content + '\'' +
                 '}';
     }
@@ -27,44 +27,44 @@ public class Comments {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Comments comments)) return false;
-        return eventid == comments.eventid && commentid == comments.commentid && auther.equals(comments.auther) && createdtime.equals(comments.createdtime) && content.equals(comments.content);
+        return eventId == comments.eventId && commentId == comments.commentId && author.equals(comments.author) && createdTime.equals(comments.createdTime) && content.equals(comments.content);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(eventid, commentid, auther, createdtime, content);
+        return Objects.hash(eventId, commentId, author, createdTime, content);
     }
 
-    public int getEventid() {
-        return eventid;
+    public int getEventId() {
+        return eventId;
     }
 
-    public void setEventid(int eventid) {
-        this.eventid = eventid;
+    public void setEventId(int eventId) {
+        this.eventId = eventId;
     }
 
-    public int getCommentid() {
-        return commentid;
+    public int getCommentId() {
+        return commentId;
     }
 
-    public void setCommentid(int commentid) {
-        this.commentid = commentid;
+    public void setCommentId(int commentId) {
+        this.commentId = commentId;
     }
 
-    public String getAuther() {
-        return auther;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setAuther(String auther) {
-        this.auther = auther;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
-    public String getCreatedtime() {
-        return createdtime;
+    public String getCreatedTime() {
+        return createdTime;
     }
 
-    public void setCreatedtime(String createdtime) {
-        this.createdtime = createdtime;
+    public void setCreatedTime(String createdTime) {
+        this.createdTime = createdTime;
     }
 
     public String getContent() {
@@ -76,10 +76,10 @@ public class Comments {
     }
 
     public Comments(int eventid, int commentid, String auther, String createdtime, String content) {
-        this.eventid = eventid;
-        this.commentid = commentid;
-        this.auther = auther;
-        this.createdtime = createdtime;
+        this.eventId = eventid;
+        this.commentId = commentid;
+        this.author = auther;
+        this.createdTime = createdtime;
         this.content = content;
     }
 }

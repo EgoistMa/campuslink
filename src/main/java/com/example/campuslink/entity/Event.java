@@ -6,59 +6,59 @@ import java.util.Objects;
 
 @Document(collection = "event")
 public class Event {
-    private int eventid;
-    private int calendarid;
+    private int eventId;
+    private int calendarId;
     private String DTSTART;
     private String DTEND;
     private String SUMMARY;
     private String location;
     private String description;
-    private String backgroundcolor;
-    private String buildingcode;
+    private String backgroundColor;
+    private String buildingCode;
     private String tag;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Event event)) return false;
-        return eventid == event.eventid && calendarid == event.calendarid && DTSTART.equals(event.DTSTART) && DTEND.equals(event.DTEND) && Objects.equals(SUMMARY, event.SUMMARY) && Objects.equals(location, event.location) && Objects.equals(description, event.description) && Objects.equals(backgroundcolor, event.backgroundcolor) && Objects.equals(buildingcode, event.buildingcode) && Objects.equals(tag, event.tag);
+        return eventId == event.eventId && calendarId == event.calendarId && DTSTART.equals(event.DTSTART) && DTEND.equals(event.DTEND) && Objects.equals(SUMMARY, event.SUMMARY) && Objects.equals(location, event.location) && Objects.equals(description, event.description) && Objects.equals(backgroundColor, event.backgroundColor) && Objects.equals(buildingCode, event.buildingCode) && Objects.equals(tag, event.tag);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(eventid, calendarid, DTSTART, DTEND, SUMMARY, location, description, backgroundcolor, buildingcode, tag);
+        return Objects.hash(eventId, calendarId, DTSTART, DTEND, SUMMARY, location, description, backgroundColor, buildingCode, tag);
     }
 
     @Override
     public String toString() {
         return "Event{" +
-                "eventid=" + eventid +
-                ", calendarid=" + calendarid +
+                "eventid=" + eventId +
+                ", calendarid=" + calendarId +
                 ", DTSTART='" + DTSTART + '\'' +
                 ", DTEND='" + DTEND + '\'' +
                 ", SUMMARY='" + SUMMARY + '\'' +
                 ", location='" + location + '\'' +
                 ", description='" + description + '\'' +
-                ", backgroundcolor='" + backgroundcolor + '\'' +
-                ", buildingcode='" + buildingcode + '\'' +
+                ", backgroundcolor='" + backgroundColor + '\'' +
+                ", buildingcode='" + buildingCode + '\'' +
                 ", tag='" + tag + '\'' +
                 '}';
     }
 
-    public int getEventid() {
-        return eventid;
+    public int getEventId() {
+        return eventId;
     }
 
-    public void setEventid(int eventid) {
-        this.eventid = eventid;
+    public void setEventId(int eventId) {
+        this.eventId = eventId;
     }
 
-    public int getCalendarid() {
-        return calendarid;
+    public int getCalendarId() {
+        return calendarId;
     }
 
-    public void setCalendarid(int calendarid) {
-        this.calendarid = calendarid;
+    public void setCalendarId(int calendarId) {
+        this.calendarId = calendarId;
     }
 
     public String getDTSTART() {
@@ -101,20 +101,20 @@ public class Event {
         this.description = description;
     }
 
-    public String getBackgroundcolor() {
-        return backgroundcolor;
+    public String getBackgroundColor() {
+        return backgroundColor;
     }
 
-    public void setBackgroundcolor(String backgroundcolor) {
-        this.backgroundcolor = backgroundcolor;
+    public void setBackgroundColor(String backgroundColor) {
+        this.backgroundColor = backgroundColor;
     }
 
-    public String getBuildingcode() {
-        return buildingcode;
+    public String getBuildingCode() {
+        return buildingCode;
     }
 
-    public void setBuildingcode(String buildingcode) {
-        this.buildingcode = buildingcode;
+    public void setBuildingCode(String buildingCode) {
+        this.buildingCode = buildingCode;
     }
 
     public String getTag() {
@@ -126,15 +126,15 @@ public class Event {
     }
 
     public Event(int eventid, int calendarid, String DTSTART, String DTEND, String SUMMARY, String location, String description, String backgroundcolor, String buildingcode, String tag) {
-        this.eventid = eventid;
-        this.calendarid = calendarid;
+        this.eventId = eventid;
+        this.calendarId = calendarid;
         this.DTSTART = DTSTART;
         this.DTEND = DTEND;
         this.SUMMARY = SUMMARY;
         this.location = location;
         this.description = description;
-        this.backgroundcolor = backgroundcolor;
-        this.buildingcode = buildingcode;
+        this.backgroundColor = backgroundcolor;
+        this.buildingCode = buildingcode;
         this.tag = tag;
     }
 }
