@@ -20,17 +20,20 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <version>3.1.0</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+            <version>3.1.0</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
+            <version>3.0.7</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -42,20 +45,36 @@
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
-            <version>2.9.2</version>
+            <version>3.0.0</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger2 -->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
-            <version>2.9.2</version>
+            <version>3.0.0</version>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>3.1.0</version>
         </dependency>
+
+        <!-- biweekly for ICS parsing -->
+        <dependency>
+            <groupId>net.sf.biweekly</groupId>
+            <artifactId>biweekly</artifactId>
+            <version>0.6.7</version>
+        </dependency>
+
+        <!-- Jackson for JSON conversion -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.15.1</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>
