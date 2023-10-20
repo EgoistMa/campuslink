@@ -137,4 +137,8 @@ public class Event {
         this.buildingcode = buildingcode;
         this.tag = tag;
     }
+
+    public  Event(){
+
+    }
 }
