@@ -40,7 +40,7 @@ public class EmailService {
         return "Dear " + userName + ",\n\n" +
                 "We received a request to reset the password for your Campuslink account.\n\n" +
                 "To reset your password, please click the link below:\n" +
-                "http://campuslink.shiropure.com/resetpassword?uid=" + resetLink + "\n\n" +
+                "http://campuslink-front.shiropure.com/resetpassword?uid=" + resetLink + "\n\n" +
                 "(Note: This link will be available for 3 hours.)\n" +
                 "If you did not request to reset your password or believe this is an error, please ignore this email and contact our support team for assistance.\n\n" +
                 "Stay secure and always ensure you use strong passwords for your accounts.\n\n" +

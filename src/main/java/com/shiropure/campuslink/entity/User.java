@@ -10,6 +10,7 @@ public class User {
     @Id
     private UUID uuid;
     private String username;
+    private String avatar;
     private String email;
     private String role;
     private String password;
@@ -21,10 +22,11 @@ public class User {
     public User() {
     }
 
-    public User(UUID uuid, String username, String email, String role, String password, String firstname, String lastname, Date lastLoginTime, boolean isActive) {
+    public User(UUID uuid, String username,String avatar, String email, String role, String password, String firstname, String lastname, Date lastLoginTime, boolean isActive) {
         this.uuid = uuid;
         this.username = username;
         this.email = email;
+        this.avatar = avatar;
         this.role = role;
         this.password = password;
         this.firstname = firstname;
@@ -95,6 +97,14 @@ public class User {
 
     public void setLastLoginTime(Date lastLoginTime) {
         this.lastLoginTime = lastLoginTime;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public boolean isActive() {

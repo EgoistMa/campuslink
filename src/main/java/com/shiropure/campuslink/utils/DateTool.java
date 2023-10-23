@@ -10,4 +10,7 @@ public class DateTool {
     public static Date nextThreeHours(Date date) {
         return new Date(date.getTime() + 3 * 60 * 60 * 1000);
     }
+    public static String getNowInString(SimpleDateFormat simpleDateFormat){
+        return simpleDateFormat.format(new Date());
+    }
 }

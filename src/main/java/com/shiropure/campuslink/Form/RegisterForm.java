@@ -15,17 +15,20 @@ public class RegisterForm extends Form {
     private String lastname;
     @ApiModelProperty(value = "username",required = true,example = "TianyuM")
     private String username;
+    @ApiModelProperty(value = "avatarSrc",required = true,example = "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50")
+    private String avatar;
     @ApiModelProperty(value = "email",required = true,example = "tianyuma4869@gmail.com")
     private String email;
     @ApiModelProperty(value = "password",required = true,example = "123456")
     private String password;
 
-    public RegisterForm(String firstname, String lastname, String username, String email, String password) {
+    public RegisterForm(String firstname, String lastname, String username, String email, String password,String avatar) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.avatar = avatar;
     }
 
     public String getFirstname() {
@@ -68,10 +71,18 @@ public class RegisterForm extends Form {
         this.password = password;
     }
 
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
     @Override
     public boolean isFormValid() {
-        if (areAnyFieldsNull(firstname, lastname, username, email, password)) {
-            System.out.println("firstname, lastname, username, email, role, password is null");
+        if (areAnyFieldsNull(firstname, lastname, username, email, password,avatar)) {
+            System.out.println("firstname, lastname, username, email, role, password, avatar is null");
             return false;
         }
 
@@ -88,6 +99,7 @@ public class RegisterForm extends Form {
         String hashedPassword = encoder.encode(password);
         return new User(UUID.randomUUID(),
                 username,
+                avatar,
                 email,
                 "user",
                 hashedPassword,
