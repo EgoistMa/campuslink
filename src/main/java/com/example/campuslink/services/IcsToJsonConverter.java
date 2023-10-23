@@ -57,19 +57,4 @@ public class IcsToJsonConverter {
         jsonCalendar.add("events", jsonEvents);
         return jsonCalendar;
     }
-
-    public static void main(String[] args){
-
-        try {
-            URL url = new URL("https://timetable.sydney.edu.au/odd/rest/calendar/ical/dd297019-48dc-439c-8f7b-36512e98b327");
-
-            // Using try-with-resources to ensure the InputStream is closed after use
-            try (InputStream is = url.openStream()) {
-                CalendarBuilder builder = new CalendarBuilder();
-
-            }
-        } catch (Exception e) {
-            e.printStackTrace(); // Log or handle the exception as appropriate
-        }
-    }
 }
