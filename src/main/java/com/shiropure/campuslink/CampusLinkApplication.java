@@ -1,4 +1,4 @@
-package com.example.campuslink;
+package com.shiropure.campuslink;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
