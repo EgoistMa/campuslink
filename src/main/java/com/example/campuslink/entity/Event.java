@@ -3,6 +3,8 @@ package com.example.campuslink.entity;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Objects;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Document(collection = "event")
 public class Event {
@@ -136,6 +138,18 @@ public class Event {
         this.backgroundcolor = backgroundcolor;
         this.buildingcode = buildingcode;
         this.tag = tag;
+    }
+
+    private static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyyMMdd'T'HHmmss");
+    private static DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("HH:mm 'on' d MMMM yyyy");
+    public String getHumanReadableDTSTART(){
+        LocalDateTime startDateTime = LocalDateTime.parse(DTSTART, inputFormatter);
+        return startDateTime.format(outputFormatter);
+    }
+
+    public String getHumanReadableDTEND(){
+        LocalDateTime endDateTime = LocalDateTime.parse(DTEND, inputFormatter);
+        return endDateTime.format(outputFormatter);
     }
 
     public  Event(){

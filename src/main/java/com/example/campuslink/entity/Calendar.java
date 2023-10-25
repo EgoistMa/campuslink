@@ -3,6 +3,8 @@ package com.example.campuslink.entity;
 import com.example.campuslink.services.IcsToJsonConverter;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -73,6 +75,18 @@ public class Calendar {
             e.printStackTrace();
         }
     }
+
+    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd'T'HHmmss");
+    public Event getNextEvent() {
+        LocalDateTime now = LocalDateTime.now();
+
+        return events.stream()
+                .filter(event -> LocalDateTime.parse(event.getDTSTART(), formatter).isAfter(now))
+                .min((e1, e2) -> LocalDateTime.parse(e1.getDTSTART(), formatter)
+                        .compareTo(LocalDateTime.parse(e2.getDTSTART(), formatter)))
+                .orElse(null);
+    }
+
 
     public int getCalendarid() {
         return calendarid;
