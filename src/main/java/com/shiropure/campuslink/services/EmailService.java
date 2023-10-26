@@ -1,5 +1,6 @@
 package com.shiropure.campuslink.services;
 
+import com.example.campuslink.entity.Event;
 import com.shiropure.campuslink.utils.DateTool;
 import com.shiropure.campuslink.entity.Log;
 import com.shiropure.campuslink.entity.LogLevel;
@@ -74,6 +75,30 @@ public class EmailService {
         message.setSubject(subject);
         message.setText(content);
         mailSender.send(message);
+    }
+
+    private String generateEventReminderEmail(Event event, String username){
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("Hello, ").append(username).append("\n\n");
+        sb.append("This is a reminder for your next event:\n");
+        sb.append("Title: ").append(event.getSUMMARY()).append("\n");
+        sb.append("Start Time: ").append(event.getHumanReadableDTSTART()).append("\n");
+        sb.append("End Time: ").append(event.getHumanReadableDTEND()).append("\n");
+        sb.append("Location: ").append(event.getLocation()).append("\n");
+        sb.append("Description: ").append(event.getDescription()).append("\n");
+        sb.append("\nBest Regards,\n");
+        sb.append("Campuslink Team");
+
+        return sb.toString();
+    }
+
+    public void sendEventReminder(Event event, String targetEmail, UUID uuid, String username, String ip){
+        Log log = new Log(LogLevel.INFO, uuid, "sending event reminder for user: " + username, "", new Date(), ip);
+        logRepo.save(log);
+        String subject = "Event Reminder: " + event.getSUMMARY();
+        String content = generateEventReminderEmail(event, username);
+        sendEmail(targetEmail, subject, content);
     }
 }
 
