@@ -2,10 +2,7 @@ package com.shiropure.campuslink.controller;
 
 import com.shiropure.campuslink.Form.*;
 import com.shiropure.campuslink.entity.*;
-import com.shiropure.campuslink.repository.LogRepository;
-import com.shiropure.campuslink.repository.PassResetTokenRepository;
-import com.shiropure.campuslink.repository.TokenRepository;
-import com.shiropure.campuslink.repository.UserRepository;
+import com.shiropure.campuslink.repository.*;
 import com.shiropure.campuslink.utils.ApiResponseObject;
 import com.shiropure.campuslink.services.EmailService;
 import com.shiropure.campuslink.utils.IPTool;
@@ -42,6 +39,9 @@ public class UserController {
 
     @Autowired
     EmailService emailService;
+
+    @Autowired
+    UserAssetsRepository userAssetsRepo;
 
     @Autowired
     PassResetTokenRepository passResetTokenRepo;
@@ -302,6 +302,80 @@ public class UserController {
             User user1 = user.get();
             res.insertData("avatar",user1.getAvatar());
             res.insertData("username",user1.getUsername());
+            //log and return response
+            logRepo.save(log);
+            return ResponseEntity.ok(res);
+        }catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body(new ApiResponseObject(500, "internal server error"));
+        }
+    }
+
+    @PostMapping("/getUserAssets")
+    public ResponseEntity<ApiResponseObject> getUserAssets(@RequestBody GetUserAssetsForm getUserAssetsForm, HttpServletRequest request){
+        try {
+            //prepare log and response body
+            ApiResponseObject res = new ApiResponseObject();
+            res.setCodeAndMessage(200,"get UserAssets successful");
+            Log log = prepareLog("get UserAssets successful", request);
+            //check form valid
+            if (!getUserAssetsForm.isFormValid()) {
+                return handleFormInvalid(res, log);
+            }
+            //check token is valid
+            if (!tokenIsValid(getUserAssetsForm.getToken())) {
+                res.setCodeAndMessage(401, "token is invalid or expired.");
+                log.setAdditionalInfo("token is invalid or expired.");
+                logRepo.save(log);
+                return ResponseEntity.status(401).body(res);
+            }
+            //check user exists and password correct
+            UserAssets userAssets = userAssetsRepo.getUserAssetsFromUuid(UUID.fromString(getUUIDFromToken(getUserAssetsForm.getToken()).get()));
+            if(userAssets == null)
+            {
+                userAssets = new UserAssets(UUID.fromString(getUUIDFromToken(getUserAssetsForm.getToken()).get()));
+                userAssetsRepo.save(userAssets);
+            }
+            res.insertData("note",userAssets.getNote());
+            res.insertData("tasks",userAssets.getTodos());
+            //log and return response
+            logRepo.save(log);
+            return ResponseEntity.ok(res);
+        }catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body(new ApiResponseObject(500, "internal server error"));
+        }
+    }
+    @PostMapping("/saveUserAssets")
+    public ResponseEntity<ApiResponseObject> saveUserAssets(@RequestBody SaveUserAssetsForm saveUserAssetsForm, HttpServletRequest request){
+        System.out.println(saveUserAssetsForm.getNote());
+        System.out.println(saveUserAssetsForm.getTasks());
+        try {
+            //prepare log and response body
+            ApiResponseObject res = new ApiResponseObject();
+            res.setCodeAndMessage(200,"save UserAssets successful");
+            Log log = prepareLog("save UserAssets successful", request);
+            //check form valid
+            if (!saveUserAssetsForm.isFormValid()) {
+                return handleFormInvalid(res, log);
+            }
+            //check token is valid
+            if (!tokenIsValid(saveUserAssetsForm.getToken())) {
+                res.setCodeAndMessage(401, "token is invalid or expired.");
+                log.setAdditionalInfo("token is invalid or expired.");
+                logRepo.save(log);
+                return ResponseEntity.status(401).body(res);
+            }
+            UUID userUUID = UUID.fromString(getUUIDFromToken(saveUserAssetsForm.getToken()).get());
+            UserAssets userAssets = userAssetsRepo.getUserAssetsFromUuid(UUID.fromString(getUUIDFromToken(saveUserAssetsForm.getToken()).get()));
+            if(userAssets == null)
+            {
+                userAssets = new UserAssets(userUUID);
+            }
+            userAssets.setNote(saveUserAssetsForm.getNote());
+            userAssets.setTodos(saveUserAssetsForm.getTasks());
+            userAssetsRepo.save(userAssets);
+
             //log and return response
             logRepo.save(log);
             return ResponseEntity.ok(res);
