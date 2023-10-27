@@ -1,5 +1,6 @@
 package com.example.campuslink.entity;
 
+import org.json.JSONObject;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Objects;
@@ -8,12 +9,14 @@ import java.time.format.DateTimeFormatter;
 
 @Document(collection = "event")
 public class Event {
+    private  JSONObject eventJSON;
     private int eventid;
     private int calendarid;
     private String DTSTART;
     private String DTEND;
     private String SUMMARY;
     private String location;
+    private String POI;
     private String description;
     private String backgroundcolor;
     private String buildingcode;
@@ -92,8 +95,12 @@ public class Event {
     }
 
     public void setLocation(String location) {
+
         this.location = location;
+        this.POI = extractPoi(location);
     }
+
+    public String getPOI(){return  POI;}
 
     public String getDescription() {
         return description;
@@ -126,6 +133,7 @@ public class Event {
     public void setTag(String tag) {
         this.tag = tag;
     }
+    public JSONObject getEventJSON(){return eventJSON;};
 
     public Event(int eventid, int calendarid, String DTSTART, String DTEND, String SUMMARY, String location, String description, String backgroundcolor, String buildingcode, String tag) {
         this.eventid = eventid;
@@ -134,10 +142,26 @@ public class Event {
         this.DTEND = DTEND;
         this.SUMMARY = SUMMARY;
         this.location = location;
+        this.POI = extractPoi(location);
         this.description = description;
         this.backgroundcolor = backgroundcolor;
         this.buildingcode = buildingcode;
         this.tag = tag;
+    }
+
+    public Event(JSONObject eventJson){
+        try{
+            this.setCalendarid(this.calendarid);
+            this.setDTSTART(eventJson.getString("DTSTART"));
+            this.setDTEND(eventJson.getString("DTEND"));
+            this.setSUMMARY(eventJson.getString("SUMMARY"));
+            this.setLocation(eventJson.getString("LOCATION"));
+            this.setDescription(eventJson.getString("DESCRIPTION"));
+            eventJson.put("POI", this.POI);
+            this.eventJSON = eventJson;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyyMMdd'T'HHmmss");
@@ -151,6 +175,12 @@ public class Event {
         LocalDateTime endDateTime = LocalDateTime.parse(DTEND, inputFormatter);
         return endDateTime.format(outputFormatter);
     }
+
+    public String extractPoi(String input) {
+        String[] parts = input.split("\\.");
+        return parts[parts.length - 1];
+    }
+
 
     public  Event(){
 

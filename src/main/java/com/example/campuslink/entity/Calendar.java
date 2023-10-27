@@ -62,13 +62,7 @@ public class Calendar {
 
         for (int i = 1; i < eventsArray.length(); i++) {
             JSONObject eventJson = eventsArray.getJSONObject(i);
-            Event event = new Event();
-            event.setCalendarid(this.calendarid);
-            event.setDTSTART(eventJson.getString("DTSTART"));
-            event.setDTEND(eventJson.getString("DTEND"));
-            event.setSUMMARY(eventJson.getString("SUMMARY"));
-            event.setLocation(eventJson.getString("LOCATION"));
-            event.setDescription(eventJson.getString("DESCRIPTION"));
+            Event event = new Event(eventJson);
             this.events.add(event);
         }
         } catch (Exception e) {
