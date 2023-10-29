@@ -1,15 +1,19 @@
 package com.shiropure.campuslink.Form;
 
+import com.shiropure.campuslink.entity.Task;
+
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 public class SaveUserAssetsForm extends Form {
     private String token;
     private String note;
-    private Map<String,Boolean>[] tasks;
+    private List<Task> tasks;
 
     public SaveUserAssetsForm() {
     }
-    public SaveUserAssetsForm(String token, String note, Map<String, Boolean>[] tasks) {
+    public SaveUserAssetsForm(String token, String note, List<Task> tasks) {
         this.token = token;
         this.note = note;
         this.tasks = tasks;
@@ -31,16 +35,25 @@ public class SaveUserAssetsForm extends Form {
         this.note = note;
     }
 
-    public Map<String, Boolean>[] getTasks() {
+    public List<Task> getTasks() {
         return tasks;
     }
 
-    public void setTodos(Map<String, Boolean>[] tasks) {
+    public void setTasks(List<Task> tasks) {
         this.tasks = tasks;
     }
 
     @Override
     public boolean isFormValid() {
         return !areAnyFieldsNull();
+    }
+
+    @Override
+    public String toString() {
+        return "SaveUserAssetsForm{" +
+                "token='" + token + '\'' +
+                ", note='" + note + '\'' +
+                ", tasks=" + tasks +
+                '}';
     }
 }

@@ -3,9 +3,11 @@ package com.shiropure.campuslink.controller;
 import com.shiropure.campuslink.Form.*;
 import com.shiropure.campuslink.entity.*;
 import com.shiropure.campuslink.repository.*;
+import com.shiropure.campuslink.services.IcsToJsonConverter;
 import com.shiropure.campuslink.utils.ApiResponseObject;
 import com.shiropure.campuslink.services.EmailService;
 import com.shiropure.campuslink.utils.IPTool;
+import com.shiropure.campuslink.utils.TokenGenerator;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Optional;
 import java.util.UUID;
@@ -45,6 +48,11 @@ public class UserController {
 
     @Autowired
     PassResetTokenRepository passResetTokenRepo;
+
+    @Autowired
+    TimeTableRepository timeTableRepo;
+
+
     @PostMapping("/register")
     public ResponseEntity<ApiResponseObject> register(@RequestBody RegisterForm registerForm, HttpServletRequest request){
         try{
@@ -348,6 +356,7 @@ public class UserController {
     }
     @PostMapping("/saveUserAssets")
     public ResponseEntity<ApiResponseObject> saveUserAssets(@RequestBody SaveUserAssetsForm saveUserAssetsForm, HttpServletRequest request){
+        System.out.println(saveUserAssetsForm.toString());
         System.out.println(saveUserAssetsForm.getNote());
         System.out.println(saveUserAssetsForm.getTasks());
         try {
@@ -384,6 +393,50 @@ public class UserController {
             return ResponseEntity.status(500).body(new ApiResponseObject(500, "internal server error"));
         }
     }
+
+    @GetMapping("/getSchedule")
+    public ResponseEntity<ApiResponseObject> getSchedule(String token, HttpServletRequest request){
+        //prepare log and response body
+        ApiResponseObject res = new ApiResponseObject();
+        res.setCodeAndMessage(200,"get Schedule successfully");
+        Log log = prepareLog("User getSchedule", request);
+        //check token is valid
+        if (token == null || !tokenIsValid(token)) {
+            res.setCodeAndMessage(401, "token is invalid or expired.");
+            log.setAdditionalInfo("token is invalid or expired.");
+            logRepo.save(log);
+            return ResponseEntity.status(401).body(res);
+        }
+        UUID uuid = UUID.fromString(TokenGenerator.getUUIDFromToken(token).get());
+        TimeTable timeTable = timeTableRepo.findByOwnerUUID(uuid);
+        res.insertData("timeTable", timeTable);
+        logRepo.save(log);
+        return ResponseEntity.ok().body(res);
+    }
+    @GetMapping("/setScheduleUrl")
+    public ResponseEntity<ApiResponseObject> setScheduleUrl(String token,String url, HttpServletRequest request) throws Exception {
+        //prepare log and response body
+        ApiResponseObject res = new ApiResponseObject();
+        res.setCodeAndMessage(200,"User Authenticated");
+        Log log = prepareLog("User getSchedule", request);
+        //check token is valid
+        if (token == null || !tokenIsValid(token)) {
+            res.setCodeAndMessage(401, "token is invalid or expired.");
+            log.setAdditionalInfo("token is invalid or expired.");
+            logRepo.save(log);
+            return ResponseEntity.status(401).body(res);
+        }
+        UUID uuid = UUID.fromString(TokenGenerator.getUUIDFromToken(token).get());
+        TimeTable timeTable = timeTableRepo.findByOwnerUUID(uuid);
+        if(timeTable == null)
+        {
+            timeTableRepo.save(new TimeTable(uuid,url,IcsToJsonConverter.convertUrlToTask(url)));
+        }
+        logRepo.save(log);
+        return ResponseEntity.ok().body(res);
+    }
+
+
     private String generateAndSaveToken(UUID uuid){
         String token = generatorToken(uuid);
         tokenRepo.save(new Token(token,nextDay(new Date())));
